@@ -1,0 +1,81 @@
+.btn {
+    height: 100px;
+}
+
+button#roku {
+    background-color: #7209b7;
+}
+
+button#macbook {
+    background-color: #ffb703;
+    color: black;
+}
+
+button#macstudio {
+    background-color: #4361ee;
+}
+
+button#nintendoswitch {
+    background-color: #780000;
+}
+
+button#snes {
+    background-color: #778da9;
+}
+
+button#ipad {
+    background-color: #001219;
+}
+
+button#macmini {
+    background-color: #fb8500;
+}
+
+button#rpi {
+    background-color: #2a9d8f;
+}
+
+/* Set up the button grid */
+.button-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 20px;
+}
+
+/* Style the buttons */
+.button {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    color: #333;
+    cursor: pointer;
+    font-size: 2em;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+}
+
+
+/* Hover effect on buttons */
+.button:hover {
+    background-color: #333;
+    color: #f2f2f2;
+}
+
+/* Set the button icons using Font Awesome */
+.fa {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+/* Make the buttons scale to the size of the browser window */
+@media only screen and (max-width: 768px) {
+    .button-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .button {
+        font-size: 1.5em;
+    }
+}

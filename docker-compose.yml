@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+
+  caddy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: caddy
+    hostname: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    networks:
+      - caddynet
+    env_file:
+      - container-vars.env
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./data:/data
+      - ./config:/config
+      - $PWD/static:/srv
+
+  whoami:
+    image: "containous/whoami"
+    container_name: "whoami"
+    hostname: "whoami"
+    networks:
+      - caddynet
+
+  piapi:
+    image: piapi
+    container_name: piapi
+    build:
+      context: ../piapi
+      dockerfile: Dockerfile
+    environment:
+      HUE_USER: ${HUE_USER}
+      HUE_HUB_IP: ${HUE_HUB_IP}
+      HUE_GO_ID: ${HUE_GO_ID}
+      SONOS_API_IP: ${SONOS_API_IP}
+    volumes:
+      - /home/pi/piapi/pipes:/hostpipe
+    # network_mode: host
+    restart: unless-stopped
+    hostname: "piapi"
+    links:
+      - caddy
+    networks:
+      - caddynet
+    ports:
+      - 5015:5015
+
+networks:
+
+  caddynet:
+    attachable: true
+    driver: bridge

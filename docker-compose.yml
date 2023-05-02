@@ -41,6 +41,7 @@ services:
       HUE_HUB_IP: ${HUE_HUB_IP}
       HUE_GO_ID: ${HUE_GO_ID}
       SONOS_API_IP: ${SONOS_API_IP}
+      TZ: "America/New_York"
     volumes:
       - /home/pi/piapi/pipes:/hostpipe
     # network_mode: host

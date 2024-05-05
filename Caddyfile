@@ -24,6 +24,16 @@ api.{$MY_DOMAIN} {
 	}
 }
 
+books.{$MY_DOMAIN} {
+	reverse_proxy 192.168.7.97:5480
+	handle_path /api/* {
+		reverse_proxy 192.168.7.97:5384
+	}
+	tls {
+		dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+	}
+}
+
 whoami.{$MY_DOMAIN} {
 	reverse_proxy whoami:80
 	tls {
